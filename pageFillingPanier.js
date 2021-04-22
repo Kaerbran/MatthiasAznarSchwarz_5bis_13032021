@@ -4,7 +4,7 @@
 
 //Cette fonction permet d'extraire des variables stockées
 const ExtractFromDataStorage = function (StorageLocationName){
-    var obj = JSON.parse(sessionStorage.[StorageLocationName]);
+    var obj = JSON.parse(sessionStorage[StorageLocationName]);
     return obj;
 }
 
