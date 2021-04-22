@@ -55,3 +55,39 @@ const getTeddy = async function (APIUrl) {
     }
 }
 
+// --------------------------------------------------------------------------------
+
+//permet de connaitre la liste de course
+let basketToDisplay = JSON.parse(sessionStorage.listeBasketTest3);
+//le tableau est completer en fonction des élements qui se trouvent dans l'object "panier"
+for (let index = 0; index < basketToDisplay.length; index++) {
+    //creer l'element tr
+    let mainElem = document.getElementById('bodyToFill');
+    const newTrElem = document.createElement("tr");
+    newTrElem.id = basketToDisplay[index].id;
+    mainElem.appendChild(newTrElem);
+
+    let secondElem = document.getElementById(basketToDisplay[index].id);
+        //creer l'element td Nom du Teddy
+        const newTdElemName = document.createElement("td");
+        newTdElemName.innerHTML = basketToDisplay[index].name;
+        secondElem.appendChild(newTdElemName);
+
+        //creer l'element td Couleur du Teddy
+        const newTdElemColor = document.createElement("td");
+        newTdElemColor.innerHTML = basketToDisplay[index].color;
+        secondElem.appendChild(newTdElemColor);
+
+        //creer l'element td Prix du Teddy
+        const newTdElemPrice = document.createElement("td");
+        newTdElemPrice.innerHTML = basketToDisplay[index].price;
+        secondElem.appendChild(newTdElemPrice);
+}  
+
+/* id ="tbodyToFill"
+<tr>    
+    <td>Giraud</td>                     <!-- Nom du Teddy Bear -->
+    <td>Pierre Victor Raphael</td>      <!-- Couleur -->
+    <td>pierre.giraud@edhec.com</td>    <!-- Prix unitaire -->
+</tr>
+*/

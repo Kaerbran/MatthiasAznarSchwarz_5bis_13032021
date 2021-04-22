@@ -58,6 +58,8 @@ const AddToBasket = function () {
         let Article = {
             name : document.getElementById('articleNameTeddy').innerHTML,
             id : document.getElementById('articleNameTeddy').titel,
+            image : document.getElementById('articleImageTeddy').src,
+            price : document.getElementById('articlePriceTeddy').innerHTML,
             color : document.getElementById('articleOptionsTeddy').options[document.getElementById('articleOptionsTeddy').selectedIndex].value
         };
         console.log('%c Find below the object that needs to be added to the basket', 'color: green; font-weight: bold;');

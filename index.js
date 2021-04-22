@@ -1,5 +1,7 @@
 const GetURLAllTeddies = 'http://localhost:3000/api/teddies/';
 
+//sessionStorage.clear();
+
 //export {getTeddy};    //n'est pas supporté par les navigateurs...
 //fonction GetAllTeddy : nous permet de recevoir un Array avec l'ensemble des ours
 const getTeddy = async function (APIUrl) {
