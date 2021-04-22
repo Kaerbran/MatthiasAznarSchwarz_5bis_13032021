@@ -1,0 +1,52 @@
+/*GRID pour les cartes de présentation du produit, se trouvant dans la page principale*/
+@mixin borderCards {
+    border: solid;
+    border-width: 2px;
+    border-color: black;
+}
+
+.mainCard{
+    display: grid;
+    grid-template-rows: 5vh 20vh 5vh;
+    grid-template-columns: 2fr 1fr 4fr 1fr 2fr ;
+    grid-template-areas: 
+    ". . . . ."
+    "photo . description . button"
+    ". . . . .";    /* quand on utilise la propriété flex grid, on ne peut pas
+    utiliser margin, pour séparer les contenus entre eux.*/
+
+    &__img{
+        grid-area: photo;
+        @include borderCards();
+
+        object-fit: cover;  /*image s'adapte au grid*/
+        width: 100%;        /*image n'est pas plus grande que le grid*/
+        height: 100%;       /*image n'est pas plus grande que le grid*/
+    }
+    &__txtdiv{
+        grid-area: description;
+        @include borderCards();
+
+        display: flex;
+        flex-direction: column;
+        
+        justify-content: center;
+        align-content: center;
+
+        padding: 5px 10px 5px 10px;
+
+        &__h2{
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        &__p{
+            overflow: scroll;
+            text-align: justify;
+        }
+    }
+    &__btt{
+        grid-area: button;
+        @include borderCards();
+    }
+}

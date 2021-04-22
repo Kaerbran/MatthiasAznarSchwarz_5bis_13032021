@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,900i" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <script src="./dist/polyfill.bundle.js"></script>
+    <script src="./dist/panier.bundle.js"></script>
+    <title>Orniconours - Fiche article</title>
+</head>
+<body>
+
+    <header class="mainHeader">
+        <h1 class="mainHeader__h1">Orniconours</h1>
+        <p class="mainHeader__p">Votre site, spécialisé dans la vente de peluches. Vous y trouverez certainement la peluche de vos rêves...</p>
+    </header>
+
+    <main>
+        <!-- Un tableau qui se remplis en fonction des élements choisis -->
+        <table>
+            <thead>
+              <tr>
+                <th>Nom du Teddy Bear</th>
+                <th>Couleur</th>
+                <th>Prix unitaire</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Giraud</td>                     <!-- Nom du Teddy Bear -->
+                <td>Pierre Victor Raphael</td>      <!-- Couleur -->
+                <td>pierre.giraud@edhec.com</td>    <!-- Prix unitaire -->
+              </tr>
+              <tr>
+                <td>Joly - Dechand</td>             <!-- Nom du Teddy Bear -->
+                <td>Pauline</td>                    <!-- Couleur -->
+                <td>pjl@gmail.com</td>              <!-- Prix unitaire -->
+              </tr>
+            </tbody>
+          </table>
+
+        <!--
+            Un formulaire avec des verifications, pour qu'on ne puisse pas saisir n'importe quoi
+            firstName, lastName, address, city et email
+        -->
+        <form action="" method="POST" class="form-example">
+            <div class="form-example">
+              <label for="name">Enter your first name: </label>
+              <input type="text" name="firstName" id="firstName" required>
+            </div>
+            <div class="form-example">
+              <label for="lastName">Enter your last name: </label>
+              <input type="text" name="lastName" id="lastName" required>
+            </div>
+            <div class="form-example">
+                <label for="address">Enter your address: </label>
+                <input type="text" name="address" id="address" required>
+            </div>
+            <div class="form-example">
+                <label for="city">Enter your city: </label>
+                <input type="text" name="city" id="city" required>
+            </div>
+            <div class="form-example">
+                <label for="email">Enter your email: </label>
+                <input type="email" name="email" id="email" required>
+              </div>
+            <div class="form-example">
+              <input type="submit" value="Subscribe!">
+            </div>
+        </form>
+
+    </main>
+
+</body>
+</html>

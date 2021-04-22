@@ -1,0 +1,199 @@
+@charset "UTF-8";
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: 5rem;
+  font-style: italic;
+}
+
+h2 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  font-style: italic;
+}
+
+p {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-size: 1rem;
+}
+
+button {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 2rem;
+}
+
+.btn {
+  color: black;
+  text-decoration: none;
+  border-radius: 3px;
+  font-size: 1.5rem;
+}
+.btn--grey {
+  background: grey;
+}
+.btn--grey:hover {
+  background: #6c6c6c;
+  transition: all 0.3s ease;
+}
+.btn--grey:active {
+  background: #404040;
+}
+.btn--blue {
+  background: lightblue;
+}
+.btn--blue:hover {
+  background: #8ec9dc;
+  transition: all 0.3s ease;
+}
+.btn--blue:active {
+  background: #4baac8;
+}
+.btn--yellow {
+  background: #f1c40f;
+}
+.btn--yellow:hover {
+  background: #cba50c;
+  transition: all 0.3s ease;
+}
+.btn--yellow:active {
+  background: #796307;
+}
+.btn--red {
+  background: #e74c3c;
+}
+.btn--red:hover {
+  background: #df2e1b;
+  transition: all 0.3s ease;
+}
+.btn--red:active {
+  background: #921e12;
+}
+
+table {
+  border-collapse: collapse;
+  width: 400px;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 10px;
+  vertical-align: top;
+}
+
+/*GRID pour les cartes de présentation du produit, se trouvant dans la page principale*/
+.mainCard {
+  display: grid;
+  grid-template-rows: 5vh 20vh 5vh;
+  grid-template-columns: 2fr 1fr 4fr 1fr 2fr;
+  grid-template-areas: ". . . . ." "photo . description . button" ". . . . .";
+  /* quand on utilise la propriété flex grid, on ne peut pas
+  utiliser margin, pour séparer les contenus entre eux.*/
+}
+.mainCard__img {
+  grid-area: photo;
+  border: solid;
+  border-width: 2px;
+  border-color: black;
+  object-fit: cover;
+  /*image s'adapte au grid*/
+  width: 100%;
+  /*image n'est pas plus grande que le grid*/
+  height: 100%;
+  /*image n'est pas plus grande que le grid*/
+}
+.mainCard__txtdiv {
+  grid-area: description;
+  border: solid;
+  border-width: 2px;
+  border-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  padding: 5px 10px 5px 10px;
+}
+.mainCard__txtdiv__h2 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+.mainCard__txtdiv__p {
+  overflow: scroll;
+  text-align: justify;
+}
+.mainCard__btt {
+  grid-area: button;
+  border: solid;
+  border-width: 2px;
+  border-color: black;
+}
+
+/* DEBUT :  GRID pour la page principale*/
+#body_mainPage {
+  display: grid;
+  grid-template-rows: 30vh auto 30vh;
+  grid-template-columns: 1fr 10fr 1fr 1fr;
+  grid-template-areas: ". header . panier" ". main . panier" ". footer footer panier";
+}
+
+.mainHeader {
+  grid-area: header;
+  display: flex;
+  flex-direction: column;
+}
+.mainHeader__h1 {
+  margin-left: auto;
+  margin-right: auto;
+}
+.mainHeader__h1::before {
+  content: "peluches";
+  display: block;
+  font-size: 1rem;
+  text-align: center;
+  width: 100px;
+  background-color: lightblue;
+  transform: rotate(-30deg) translateX(-50%) translateY(50%);
+}
+.mainHeader__p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#mainMain {
+  grid-area: main;
+}
+
+.mainPanier {
+  grid-area: panier;
+  background-color: lightblue;
+}
+.mainPanier__h2 {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  position: -webkit-sticky;
+  position: sticky;
+  top: 33vh;
+}
+
+.mainFooter {
+  grid-area: footer;
+}
+
+/* FIN :    GRID pour la page principale*/
+
+/*# sourceMappingURL=style.css.map */

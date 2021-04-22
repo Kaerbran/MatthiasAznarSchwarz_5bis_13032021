@@ -1,0 +1,32 @@
+
+@mixin button-bg($bg) {
+    background: $bg;
+    &:hover {
+      background:darken($bg,8%);
+      transition: all 0.3s ease;
+    }
+    &:active {
+      background:darken($bg,25%);
+    } 
+  }
+
+.btn {
+    color:black;
+    text-decoration:none;
+    border-radius:3px;
+    font-size: 1.5rem;
+
+    &--grey {
+        @include button-bg(grey);
+    }
+    &--blue {
+        @include button-bg(lightblue);
+    }
+    &--yellow {
+        @include button-bg(#f1c40f);
+    }
+    &--red {
+        @include button-bg(#e74c3c);
+    }
+}
+

@@ -1,0 +1,64 @@
+
+/* DEBUT :  GRID pour la page principale*/
+#body_mainPage{
+    display: grid;
+    grid-template-rows: 30vh auto 30vh;
+    grid-template-columns: 1fr 10fr 1fr 1fr;
+    grid-template-areas: 
+    ". header . panier"
+    ". main . panier"
+    ". footer footer panier";
+}
+
+.mainHeader{
+    grid-area: header;
+
+    display: flex;
+    flex-direction: column;
+
+    &__h1{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    &__h1::before{
+        content: 'peluches';
+        display: block;
+
+        font-size: 1rem;
+        text-align: center;
+
+        width: 100px;
+        background-color: lightblue;
+        transform: rotate(-30deg) translateX(-50%) translateY(50%);
+    }
+
+    &__p{
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+#mainMain{
+    grid-area: main;
+}
+
+.mainPanier{
+    grid-area: panier;
+    
+    background-color: lightblue;
+
+    &__h2{
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+
+        position: -webkit-sticky;
+        position: sticky;
+        top: 33vh;
+        }
+}
+
+.mainFooter{
+    grid-area: footer;
+}
+/* FIN :    GRID pour la page principale*/
+
