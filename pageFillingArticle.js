@@ -1,6 +1,20 @@
-import {getTeddy} from './index.js'
-
-console.log("file n°2");
+// import {getTeddy} from './index.js'   //n'est pas supporté par les navigateurs...
+//fonction GetAllTeddy : nous permet de recevoir un Array avec l'ensemble des ours
+const getTeddy = async function (APIUrl) {
+    try{
+        console.log("The URL value is :" + APIUrl);
+        let responseAllTeddy = await fetch(APIUrl)
+        if(responseAllTeddy.ok){
+            let data = await responseAllTeddy.json()
+            console.log(data)
+            return data;
+        } else{
+            console.error('Error code from server : ${error}');
+        }
+    } catch (e) {
+        console.log(e);
+    }
+}
 
 //permet de connaitre le Teddybear sélectionné dans index.js
 let GetURL = JSON.parse(sessionStorage.GetURLArticle);
@@ -61,6 +75,7 @@ const AddToBasket = function () {
     }
 }
 
+//export {AddToDataStorage};    //n'est pas supporté par les navigateurs...
 //Cette fonction permet de stocker (des objects) dans la session Storage. (Sous la forme d'un tableau.)
 const AddToDataStorage = function (ObjectToStore, StorageLocationName, AddToMemory) {
     if (typeof Storage !== "undefined") {
@@ -91,6 +106,7 @@ const AddToDataStorage = function (ObjectToStore, StorageLocationName, AddToMemo
     }
 }
 
+//export {ExtractFromDataStorage};    //n'est pas supporté par les navigateurs...
 //Cette fonction permet d'extraire des variables stockées
 const ExtractFromDataStorage = function (StorageLocationName){
     var obj = JSON.parse(sessionStorage.[StorageLocationName]);
