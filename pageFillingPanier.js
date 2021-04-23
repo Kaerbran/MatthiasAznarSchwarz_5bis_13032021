@@ -58,7 +58,7 @@ const getTeddy = async function (APIUrl) {
 // --------------------------------------------------------------------------------
 
 //permet de connaitre la liste de course
-let basketToDisplay = JSON.parse(sessionStorage.listeBasketTest3);
+var basketToDisplay = JSON.parse(sessionStorage.listeBasketTest3);
 //le tableau est completer en fonction des élements qui se trouvent dans l'object "panier"
 for (let index = 0; index < basketToDisplay.length; index++) {
     //creer l'element tr
@@ -84,10 +84,31 @@ for (let index = 0; index < basketToDisplay.length; index++) {
         secondElem.appendChild(newTdElemPrice);
 }  
 
-/* id ="tbodyToFill"
-<tr>    
-    <td>Giraud</td>                     <!-- Nom du Teddy Bear -->
-    <td>Pierre Victor Raphael</td>      <!-- Couleur -->
-    <td>pierre.giraud@edhec.com</td>    <!-- Prix unitaire -->
-</tr>
-*/
+var sommePrix = 0;
+for (let index = 0; index < basketToDisplay.length; index++) {
+    sommePrix += Number(basketToDisplay[index].price);
+}
+document.getElementById('summePriceBasket').innerHTML = sommePrix;
+
+const sendPurchaseOrder = function (element) {
+    let formPurchaseOrder = {
+        contactDetails : {
+            firstName : document.getElementById('firstName').innerHTML,
+            lastName : document.getElementById('lastName').innerHTML,
+            adresse : document.getElementById('adress').innerHTML,
+            city : document.getElementById('city').innerHTML,
+            email : document.getElementById('email').innerHTML},
+        Basket : []
+    }
+
+    for (let index = 0; index < basketToDisplay.length; index++) {
+        let productAddForm = {
+            id : basketToDisplay[index].id,
+            color basketToDisplay[index].color: 
+        }
+        formPurchaseOrder.Basket.push(productAddForm);
+    }
+
+    //ici mettre Fetch with POST
+    
+}
