@@ -85,6 +85,10 @@ button {
   background: #921e12;
 }
 
+.red {
+  color: red;
+}
+
 table {
   border-collapse: collapse;
   width: 400px;

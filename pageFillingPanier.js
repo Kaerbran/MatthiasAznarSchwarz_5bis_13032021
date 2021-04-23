@@ -92,7 +92,7 @@ for (let index = 0; index < basketToDisplay.length; index++) {
 document.getElementById('summePriceBasket').innerHTML = sommePrix;
 
 var firstNameVerification = false;
-var lastNameVerification = true;
+var lastNameVerification = false;
 var adressVerification = true;
 var cityVerification = true;
 var emailVerification = true;
@@ -103,17 +103,32 @@ document.getElementById('firstName').addEventListener('change', function (event)
 
     if (constraint.test(this.value)) { //ça fonctionne :)
         firstNameVerification = true;
-        if (firstNameVerification + lastNameVerification + adressVerification + cityVerification + emailVerification) {
+        document.getElementById('firstName').classList.remove("red");
+        if (firstNameVerification & lastNameVerification & adressVerification & cityVerification & emailVerification) {
             document.getElementById("bttFormSend").removeAttribute("disabled");
         }
     }
     else { //ne fonctionne pas :(
         document.getElementById("bttFormSend").setAttribute("disabled", true);
+        document.getElementById('firstName').classList.add("red");
         firstNameVerification = false;
     }
 } );
 document.getElementById('lastName').addEventListener('change', function () {
-    
+    let constraint = /^[ a-zA-Z\-\’]{3,}/;
+
+    if (constraint.test(this.value)) { //ça fonctionne :)
+        lastNameVerification = true;
+        document.getElementById('lastName').classList.remove("red");
+        if (firstNameVerification & lastNameVerification & adressVerification & cityVerification & emailVerification) {
+            document.getElementById("bttFormSend").removeAttribute("disabled");
+        }
+    }
+    else { //ne fonctionne pas :(
+        document.getElementById("bttFormSend").setAttribute("disabled", true);
+        document.getElementById('lastName').classList.add("red");
+        lastNameVerification = false;
+    }
 });
 document.getElementById('adress').addEventListener('change', function () {
     
