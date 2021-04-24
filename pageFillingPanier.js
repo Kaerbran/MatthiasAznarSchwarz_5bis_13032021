@@ -8,50 +8,34 @@ const ExtractFromDataStorage = function (StorageLocationName){
     return obj;
 }
 
-//Cette fonction permet de stocker (des objects) dans la session Storage. (Sous la forme d'un tableau.)
-const AddToDataStorage = function (ObjectToStore, StorageLocationName, AddToMemory) {
-    if (typeof Storage !== "undefined") {
-        // localStorage & sessionStorage support!
-
-        if (AddToMemory && sessionStorage.getItem(StorageLocationName) != null){
-            let allreadyStoredObject = ExtractFromDataStorage(StorageLocationName);
-            //console.log('%c Find below the list of all teddies that are in the previous shopping list', 'color: orange; font-weight: bold;');
-            //console.log (allreadyStoredObject);
-            
-            allreadyStoredObject.push(ObjectToStore);
-            //console.log('%c Find below the list of all teddies that are in the new shopping list', 'color: orange; font-weight: bold;');
-            //console.log (allreadyStoredObject);
-
-            sessionStorage.setItem(StorageLocationName, JSON.stringify(allreadyStoredObject));
-        }
-        else{
-            let ArrayToStore = [];
-            ArrayToStore.push(ObjectToStore);
-            sessionStorage.setItem(StorageLocationName, JSON.stringify(ArrayToStore));
-            //console.log('%c Find below the list of the teddy that was added in the shopping list', 'color: green; font-weight: bold;');
-            //console.log (ArrayToStore);
-        }
-    }
-    else {
-        // No web storage support
-        console.log('%c No web storage support', 'color: red; font-weight: bold;');
-    }
-}
-
-//fonction GetAllTeddy : nous permet de recevoir un Array avec l'ensemble des ours
-const getTeddy = async function (APIUrl) {
-    try{
+//POST pour l'envoie du contact et du tableau d'achats
+const sendPurchaseRequest = async function (APIUrl, dataToSend) {
+    
+    try {
         console.log("The URL value is :" + APIUrl);
-        let responseAllTeddy = await fetch(APIUrl)
-        if(responseAllTeddy.ok){
-            let data = await responseAllTeddy.json()
-            console.log(data)
-            return data;
-        } else{
-            console.error('Error code from server : ${error}');
+        console.log("The data that is send :" + dataToSend);
+
+        let response = await fetch(form.getAttribute('action'), {
+            method: 'POST',
+            headers: {
+              'X-Requested-With': 'xmlhttprequest'
+            },
+            body: dataToSend
+        })
+
+        let responseData = await response.json()
+        if (response.ok === false) {
+            let errors = responseData
+            let errorsKey = Object.keys(errors)
+            console.log('%c Voici les erreurs retournées par le serveur ${errors} ${errorsKey}', 'color: red; font-weight: bold;');
+            
+          // La réponse est ok, on vide le formulaire
+        } else {
+            console.log('%c Voici la réponse retournée par le serveur ${responseData}', 'color: green; font-weight: bold;');
         }
-    } catch (e) {
-        console.log(e);
+
+    } catch (e){
+        console.error('Error code from server : ${error}');
     }
 }
 
@@ -61,13 +45,14 @@ const getTeddy = async function (APIUrl) {
 var basketToDisplay = JSON.parse(sessionStorage.listeBasketTest3);
 //le tableau est completer en fonction des élements qui se trouvent dans l'object "panier"
 for (let index = 0; index < basketToDisplay.length; index++) {
+    console.log(basketToDisplay.length);
     //creer l'element tr
     let mainElem = document.getElementById('bodyToFill');
     const newTrElem = document.createElement("tr");
-    newTrElem.id = basketToDisplay[index].id;
+    newTrElem.id = index + 1;
     mainElem.appendChild(newTrElem);
 
-    let secondElem = document.getElementById(basketToDisplay[index].id);
+    let secondElem = document.getElementById(index +1);
         //creer l'element td Nom du Teddy
         const newTdElemName = document.createElement("td");
         newTdElemName.innerHTML = basketToDisplay[index].name;
@@ -93,8 +78,8 @@ document.getElementById('summePriceBasket').innerHTML = sommePrix;
 
 var firstNameVerification = false;
 var lastNameVerification = false;
-var adressVerification = true;
-var cityVerification = true;
+var adressVerification = false;
+var cityVerification = false;
 var emailVerification = true;
 
 //EventListener pour s'assurer que la valeur des champs est juste
@@ -131,10 +116,36 @@ document.getElementById('lastName').addEventListener('change', function () {
     }
 });
 document.getElementById('adress').addEventListener('change', function () {
-    
+    let constraint = /^[ a-zA-Z\-\’]{3,}/;
+
+    if (constraint.test(this.value)) { //ça fonctionne :)
+        lastNameVerification = true;
+        document.getElementById('adress').classList.remove("red");
+        if (firstNameVerification & lastNameVerification & adressVerification & cityVerification & emailVerification) {
+            document.getElementById("bttFormSend").removeAttribute("disabled");
+        }
+    }
+    else { //ne fonctionne pas :(
+        document.getElementById("bttFormSend").setAttribute("disabled", true);
+        document.getElementById('adress').classList.add("red");
+        lastNameVerification = false;
+    }
 });
 document.getElementById('city').addEventListener('change', function () {
-    
+    let constraint = /^[ a-zA-Z\-\’]{3,}/;
+
+    if (constraint.test(this.value)) { //ça fonctionne :)
+        lastNameVerification = true;
+        document.getElementById('city').classList.remove("red");
+        if (firstNameVerification & lastNameVerification & adressVerification & cityVerification & emailVerification) {
+            document.getElementById("bttFormSend").removeAttribute("disabled");
+        }
+    }
+    else { //ne fonctionne pas :(
+        document.getElementById("bttFormSend").setAttribute("disabled", true);
+        document.getElementById('city').classList.add("red");
+        lastNameVerification = false;
+    }
 });
 document.getElementById('email').addEventListener('change', function () {
     
@@ -164,5 +175,6 @@ document.getElementById('bttFormSend').addEventListener('click', function (event
 
     console.log(formPurchaseOrder);
 
-    //ici mettre Fetch with POST   
+    //ce programme envoie la commande vers le serveur
+    sendPurchaseRequest ('h​ttp://localhost:3000/api/teddies/order', formPurchaseOrder);
 });
