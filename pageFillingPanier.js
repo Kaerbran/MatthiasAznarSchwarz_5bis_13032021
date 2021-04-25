@@ -10,20 +10,20 @@ const ExtractFromDataStorage = function (StorageLocationName){
 
 //POST pour l'envoie du contact et du tableau d'achats
 const sendPurchaseRequest = async function (APIUrl, dataToSend) {
-    
     try {
         console.log("The URL value is :" + APIUrl);
-        console.log("The data that is send :" + dataToSend);
+        console.log("The data that is send :");
+        console.log(dataToSend);
 
-        let response = await fetch(form.getAttribute('action'), {
+
+        let response = await fetch(APIUrl, {
             method: 'POST',
-            headers: {
-              'X-Requested-With': 'xmlhttprequest'
-            },
-            body: dataToSend
+            body: JSON.stringify(dataToSend) 
         })
 
         let responseData = await response.json()
+        console.log('%c Voici la réponse du serveur ${responseData}', 'color: orange; font-weight: bold;');
+
         if (response.ok === false) {
             let errors = responseData
             let errorsKey = Object.keys(errors)
@@ -31,11 +31,11 @@ const sendPurchaseRequest = async function (APIUrl, dataToSend) {
             
           // La réponse est ok, on vide le formulaire
         } else {
-            console.log('%c Voici la réponse retournée par le serveur ${responseData}', 'color: green; font-weight: bold;');
+            console.log('%c Voici la réponse du serveur, dans boucle else ${responseData}', 'color: green; font-weight: bold;');
         }
 
     } catch (e){
-        console.error('Error code from server : ${error}');
+        console.error('Error code from server : ${e}');
     }
 }
 
@@ -45,7 +45,6 @@ const sendPurchaseRequest = async function (APIUrl, dataToSend) {
 var basketToDisplay = JSON.parse(sessionStorage.listeBasketTest3);
 //le tableau est completer en fonction des élements qui se trouvent dans l'object "panier"
 for (let index = 0; index < basketToDisplay.length; index++) {
-    console.log(basketToDisplay.length);
     //creer l'element tr
     let mainElem = document.getElementById('bodyToFill');
     const newTrElem = document.createElement("tr");
@@ -119,7 +118,7 @@ document.getElementById('adress').addEventListener('change', function () {
     let constraint = /^[ a-zA-Z\-\’]{3,}/;
 
     if (constraint.test(this.value)) { //ça fonctionne :)
-        lastNameVerification = true;
+        adressVerification = true;
         document.getElementById('adress').classList.remove("red");
         if (firstNameVerification & lastNameVerification & adressVerification & cityVerification & emailVerification) {
             document.getElementById("bttFormSend").removeAttribute("disabled");
@@ -135,7 +134,7 @@ document.getElementById('city').addEventListener('change', function () {
     let constraint = /^[ a-zA-Z\-\’]{3,}/;
 
     if (constraint.test(this.value)) { //ça fonctionne :)
-        lastNameVerification = true;
+        cityVerification = true;
         document.getElementById('city').classList.remove("red");
         if (firstNameVerification & lastNameVerification & adressVerification & cityVerification & emailVerification) {
             document.getElementById("bttFormSend").removeAttribute("disabled");
@@ -156,25 +155,22 @@ document.getElementById('bttFormSend').addEventListener('click', function (event
     event.preventDefault();
 
     let formPurchaseOrder = {
-        contactDetails : {
+        contact : {
             firstName : document.getElementById('firstName').value,
             lastName : document.getElementById('lastName').value,
-            adresse : document.getElementById('adress').value,
-            city : document.getElementById('city').value,
-            email : document.getElementById('email').value},
-        Basket : []
+            email : document.getElementById('email').value,
+            adress : document.getElementById('adress').value,
+            city : document.getElementById('city').value},
+        products : []
     }
 
     for (let index = 0; index < basketToDisplay.length; index++) {
         let productAddForm = {
             id : basketToDisplay[index].id,
-            color : basketToDisplay[index].color 
+            color : basketToDisplay[index].color
         }
-        formPurchaseOrder.Basket.push(productAddForm);
+        formPurchaseOrder.products.push(productAddForm);
     }
-
-    console.log(formPurchaseOrder);
-
-    //ce programme envoie la commande vers le serveur
+    //cette fonction envoie la requete POST vers le serveur
     sendPurchaseRequest ('h​ttp://localhost:3000/api/teddies/order', formPurchaseOrder);
 });
