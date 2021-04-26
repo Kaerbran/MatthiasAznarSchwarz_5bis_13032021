@@ -18,22 +18,21 @@ const sendPurchaseRequest = async function (APIUrl, dataToSend) {
 
         let response = await fetch(APIUrl, {
             method: 'POST',
+            headers: {
+                "Content-Type": "application/json" //pour un corps de type chaine
+            },
             body: JSON.stringify(dataToSend) 
         })
+        console.log("1 : POST envoyé")
 
-        let responseData = await response.json()
-        console.log('%c Voici la réponse du serveur ${responseData}', 'color: orange; font-weight: bold;');
-
+        let data = await response.json() 
         if (response.ok === false) {
-            let errors = responseData
-            let errorsKey = Object.keys(errors)
-            console.log('%c Voici les erreurs retournées par le serveur ${errors} ${errorsKey}', 'color: red; font-weight: bold;');
-            
-          // La réponse est ok, on vide le formulaire
+            console.log("2 : réponse reçu")
+            console.log(data);
         } else {
-            console.log('%c Voici la réponse du serveur, dans boucle else ${responseData}', 'color: green; font-weight: bold;');
+            console.error(error);
         }
-
+        
     } catch (e){
         console.error('Error code from server : ${e}');
     }
@@ -165,11 +164,14 @@ document.getElementById('bttFormSend').addEventListener('click', function (event
     }
 
     for (let index = 0; index < basketToDisplay.length; index++) {
+        /*
         let productAddForm = {
             id : basketToDisplay[index].id,
             color : basketToDisplay[index].color
         }
         formPurchaseOrder.products.push(productAddForm);
+        */
+        formPurchaseOrder.products.push(basketToDisplay[index].id);
     }
     //cette fonction envoie la requete POST vers le serveur
     sendPurchaseRequest ('h​ttp://localhost:3000/api/teddies/order', formPurchaseOrder);
