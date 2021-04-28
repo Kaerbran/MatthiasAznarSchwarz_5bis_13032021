@@ -9,32 +9,26 @@ const ExtractFromDataStorage = function (StorageLocationName){
 }
 
 //POST pour l'envoie du contact et du tableau d'achats
-const sendPurchaseRequest = async function (APIUrl, dataToSend) {
+const sendPurchaseRequest = async function (dataToSend) {
+    console.log(dataToSend);
     try {
-        console.log("The URL value is :" + APIUrl);
-        console.log("The data that is send :");
-        console.log(dataToSend);
-
-
-        let response = await fetch(APIUrl, {
+        let response = await fetch('h​ttp://localhost:3000/api/teddies/order', {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json" //pour un corps de type chaine
+                'content-type': 'application/json'
             },
             body: JSON.stringify(dataToSend) 
         })
-        console.log("1 : POST envoyé")
 
-        let data = await response.json() 
-        if (response.ok === false) {
-            console.log("2 : réponse reçu")
-            console.log(data);
-        } else {
-            console.error(error);
-        }
+        console.log("response OK est affiché ci-dessous");
+        console.log(response.ok); //false
         
-    } catch (e){
-        console.error('Error code from server : ${e}');
+        let responseData = await response.json();
+        sessionStorage.setItem('memoryResponse', responseData.orderId);
+        //window.location = 'remerciement.html';
+
+    } catch (error){
+        console.log(error);
     }
 }
 
@@ -150,29 +144,45 @@ document.getElementById('email').addEventListener('change', function () {
 });
 
 //eventListener pour envoyer le formulaire
-document.getElementById('bttFormSend').addEventListener('click', function (event) {
-    event.preventDefault();
-
-    let formPurchaseOrder = {
+document.getElementById('bttFormSend').addEventListener('click', function (e) {
+    e.preventDefault();
+    /*let formPurchaseOrder = {
         contact : {
             firstName : document.getElementById('firstName').value,
             lastName : document.getElementById('lastName').value,
             email : document.getElementById('email').value,
-            adress : document.getElementById('adress').value,
+            address : document.getElementById('adress').value,
             city : document.getElementById('city').value},
         products : []
-    }
-
+    };
     for (let index = 0; index < basketToDisplay.length; index++) {
-        /*
-        let productAddForm = {
-            id : basketToDisplay[index].id,
-            color : basketToDisplay[index].color
-        }
-        formPurchaseOrder.products.push(productAddForm);
-        */
         formPurchaseOrder.products.push(basketToDisplay[index].id);
-    }
+    }*/
+
+    let contact = {
+        firstName : "matthias",
+        lastName : "aznar-schwarz",
+        email : "matthias.aznar-schwarz@gmail.com",
+        address : "kleber",
+        city : "Colmar"
+    };
+    let products = ["5be9c8541c9d440000665243", "5beaa8bf1c9d440000a57d94"];
+
+    let formPurchaseOrder = {contact, products}; 
+
     //cette fonction envoie la requete POST vers le serveur
-    sendPurchaseRequest ('h​ttp://localhost:3000/api/teddies/order', formPurchaseOrder);
+    sendPurchaseRequest (formPurchaseOrder);
+
+    console.log(sessionStorage.getItem('memoryResponse'));
 });
+
+/*let contact = {
+        firstName : "matthias",
+        lastName : "aznar-schwarz",
+        email : "matthias.aznar-schwarz@gmail.com",
+        adress : "kleber",
+        city : "Colmar"
+    };
+    let products = ["5be9c8541c9d440000665243", "5beaa8bf1c9d440000a57d94"];
+
+    let formPurchaseOrder = {contact, products}; */
