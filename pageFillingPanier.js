@@ -12,7 +12,7 @@ const ExtractFromDataStorage = function (StorageLocationName){
 const sendPurchaseRequest = async function (dataToSend) {
     console.log(dataToSend);
     try {
-        let response = await fetch('h​ttp://localhost:3000/api/teddies/order', {
+        let response = await fetch('http://localhost:3000/api/teddies/order', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -20,11 +20,14 @@ const sendPurchaseRequest = async function (dataToSend) {
             body: JSON.stringify(dataToSend) 
         });
 
-        console.log(response.ok); //it shows false...
-        
-        let responseData = await response.json();
-        sessionStorage.setItem('memoryResponse', responseData.orderId);
-        //window.location = 'remerciement.html';
+        if (response.ok) {
+            let responseData = await response.json();
+            window.location = 'confirmation.html?id=' + responseData.orderId + '&price=' + sommePrix;
+
+        } else {
+            console.log("Aïe, une erreur c'est produite :");
+            console.log(response.status);
+        }
 
     } catch (error){
         console.log(error);
@@ -158,19 +161,6 @@ document.getElementById('bttFormSend').addEventListener('click', function (e) {
         formPurchaseOrder.products.push(basketToDisplay[index].id);
     }
 
-    //cette fonction envoie la requete POST vers le serveur
+    //this function send the POST request to the server
     sendPurchaseRequest (formPurchaseOrder);
-
-    console.log(sessionStorage.getItem('memoryResponse'));
 });
-
-    /*let contact = {
-        firstName : "matthias",
-        lastName : "aznar-schwarz",
-        email : "matthias.aznar-schwarz@gmail.com",
-        adress : "kleber",
-        city : "Colmar"
-    };
-    let products = ["5be9c8541c9d440000665243", "5beaa8bf1c9d440000a57d94"];
-
-    let formPurchaseOrder = {contact, products}; */
