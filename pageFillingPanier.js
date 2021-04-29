@@ -18,10 +18,9 @@ const sendPurchaseRequest = async function (dataToSend) {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(dataToSend) 
-        })
+        });
 
-        console.log("response OK est affiché ci-dessous");
-        console.log(response.ok); //false
+        console.log(response.ok); //it shows false...
         
         let responseData = await response.json();
         sessionStorage.setItem('memoryResponse', responseData.orderId);
@@ -146,7 +145,7 @@ document.getElementById('email').addEventListener('change', function () {
 //eventListener pour envoyer le formulaire
 document.getElementById('bttFormSend').addEventListener('click', function (e) {
     e.preventDefault();
-    /*let formPurchaseOrder = {
+    let formPurchaseOrder = {
         contact : {
             firstName : document.getElementById('firstName').value,
             lastName : document.getElementById('lastName').value,
@@ -157,18 +156,7 @@ document.getElementById('bttFormSend').addEventListener('click', function (e) {
     };
     for (let index = 0; index < basketToDisplay.length; index++) {
         formPurchaseOrder.products.push(basketToDisplay[index].id);
-    }*/
-
-    let contact = {
-        firstName : "matthias",
-        lastName : "aznar-schwarz",
-        email : "matthias.aznar-schwarz@gmail.com",
-        address : "kleber",
-        city : "Colmar"
-    };
-    let products = ["5be9c8541c9d440000665243", "5beaa8bf1c9d440000a57d94"];
-
-    let formPurchaseOrder = {contact, products}; 
+    }
 
     //cette fonction envoie la requete POST vers le serveur
     sendPurchaseRequest (formPurchaseOrder);
@@ -176,7 +164,7 @@ document.getElementById('bttFormSend').addEventListener('click', function (e) {
     console.log(sessionStorage.getItem('memoryResponse'));
 });
 
-/*let contact = {
+    /*let contact = {
         firstName : "matthias",
         lastName : "aznar-schwarz",
         email : "matthias.aznar-schwarz@gmail.com",
