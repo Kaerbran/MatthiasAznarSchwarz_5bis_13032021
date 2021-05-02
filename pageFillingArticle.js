@@ -35,7 +35,7 @@ getTeddy(GetURL)
     document.getElementById('articleDescriptionTeddy').innerHTML = objectTeddy.description;
 
     //Inserer le prix du Teddybear
-    document.getElementById('articlePriceTeddy').innerHTML = objectTeddy.price;
+    document.getElementById('articlePriceTeddy').innerHTML = objectTeddy.price + " €";
 
     //Inserer le menu déroulant du Teddybear
     for (let index = 0; index < objectTeddy.colors.length; index++) {
