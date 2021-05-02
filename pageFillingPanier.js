@@ -22,10 +22,10 @@ const sendPurchaseRequest = async function (dataToSend) {
 
         if (response.ok) {
             let responseData = await response.json();
-            window.location = 'confirmation.html?id=' + responseData.orderId + '&price=' + sommePrix;
+            window.location = 'remerciement.html?id=' + responseData.orderId + '&price=' + sommePrix;
 
         } else {
-            console.log("Aïe, une erreur c'est produite :");
+            console.log("Aïe, une erreur c'est produite et la requête n'a pas abouti:");
             console.log(response.status);
         }
 
