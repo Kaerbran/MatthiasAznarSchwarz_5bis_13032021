@@ -74,7 +74,7 @@ var firstNameVerification = false;
 var lastNameVerification = false;
 var adressVerification = false;
 var cityVerification = false;
-var emailVerification = true;
+var emailVerification = false;
 
 //EventListener pour s'assurer que la valeur des champs est juste
 document.getElementById('firstName').addEventListener('change', function (event) {
@@ -142,7 +142,20 @@ document.getElementById('city').addEventListener('change', function () {
     }
 });
 document.getElementById('email').addEventListener('change', function () {
-    
+    let constraintEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (constraintEmail.test(this.value)) { //ça fonctionne :)
+        emailVerification = true;
+        document.getElementById('email').classList.remove("red");
+        if (firstNameVerification & lastNameVerification & adressVerification & cityVerification & emailVerification) {
+            document.getElementById("bttFormSend").removeAttribute("disabled");
+        }
+    }
+    else { //ne fonctionne pas :(
+        document.getElementById("bttFormSend").setAttribute("disabled", true);
+        document.getElementById('email').classList.add("red");
+        emailVerification = false;
+    }
 });
 
 //eventListener pour envoyer le formulaire
