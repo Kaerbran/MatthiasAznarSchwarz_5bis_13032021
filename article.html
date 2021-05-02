@@ -9,49 +9,67 @@
     <script src="pageFillingArticle.js"></script>
     <title>Orniconours - Fiche article</title>
 </head>
-<body class="FlexCol">
 
-    <div class="FlexRow">
-        <header class="container secondaryHeader">
-            <h1 class="secondaryHeader__h1">Orniconours</h1>
-            <p class="secondaryHeader__p">Votre site, spécialisé dans la vente de peluches. Vous y trouverez certainement la peluche de vos rêves...</p>
-        </header>
-    
-        <main class="container">
-            <img id="articleImageTeddy" src="" alt="">
-            <h2 id="articleNameTeddy">Name of Teddy bear</h2>
-            <p id="articleDescriptionTeddy">Descritption</p>
-            <p id="articlePriceTeddy">price</p>
-    
-            <label for="color-select">Choose a color:</label>
-            <select id="articleOptionsTeddy" name="colors" id="color-select">
-                <option value="no_selection">--Please choose an option--</option>
-                <!--
-                    ici à construire lors de la création de la page
-                    <option value="blue">Blue</option>
-                    ...
-                -->
-            </select>
-    
-            <button id="articleBttAddBasket">Add the selected teddy to your basket</button>
-    
-        </main>
-    
-        <a href="panier.html">
-            vers le panier
-        </a>
-        <a href="index.html">
-            retour acceuil
-          </a>
-    
+<body>
+
+    <header class="mainHeader">
+        <h1 class="mainHeader__h1">Orniconours</h1>
+        <p class="mainHeader__p">Votre site, spécialisé dans la vente de peluches. Vous y trouverez certainement la peluche de vos rêves...</p>
+    </header>
+
+    <main>
+        <div>
+            <a href="index.html">
+                retour acceuil
+            </a>
+            <a href="panier.html">
+                vers le panier
+            </a>
+        </div>
+
+        <div class="containerChoices">	
+	
+            <!-- Start	Product details -->
+            <div class="product-details">
+                <!-- 		The name of the product -->
+                <h1 id="articleNameTeddy">Name of Teddy bear</h1>	
+                <!-- The most important information about the product -->
+                <p id="articleDescriptionTeddy" class="information">"Here we will have a long description of our Teddybear"</p>
+                
+                <!-- 		Choice of teddies -->
+                <label for="articleOptionsTeddy">Choose a color:</label>
+                <select id="articleOptionsTeddy" name="colors">
+                    <option value="no_selection">--Please choose an option--</option>
+                    <!--
+                        ici à construire lors de la création de la page
+                        <option value="blue">Blue</option>
+                        ...
+                    -->
+                </select>
+                
+                <!-- Start Button buying -->
+                <button id="articleBttAddBasket" class="btnn">
+                    <!-- 		the Price -->
+                    <span id="articlePriceTeddy" class="price">XX $</span>
+                    <!-- 		Buy Now / ADD to Cart-->
+                    <span class="buy">Buy Now</span>
+                </button>
+                <!-- End Button buying -->
+                
+            </div>
+            <!-- 	End	Product details   -->
+            <!-- 	Start product image -->
+            <div class="product-image">
+                <img id="articleImageTeddy" src="" alt="">            
+            </div>
+            <!-- 	End product image -->
+        </div>
+
+
         <footer class="secondaryFooter">
             <br> <br> <br> <br> <br> 
         </footer>
-    </div>
-
-    <div class="secondaryPanier">
-        <h2 class="secondaryPanier__h2">vers le panier</h2>
-    </div>
+    </main>
 
 </body>
 </html>

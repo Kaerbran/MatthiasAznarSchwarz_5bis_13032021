@@ -1,0 +1,122 @@
+/* fonts  */
+.containerChoices{
+	box-shadow: 0 15px 30px 1px rgba(128, 128, 128, 0.31);
+	background: rgba(255, 255, 255, 0.90);
+	text-align: center;
+	border-radius: 5px;
+	overflow: hidden;
+	margin: 5em auto;
+	height: 400px;
+	width: 600px;
+}
+
+/* 	Product details  */
+.product-details {
+	position: relative;
+	text-align: left;
+	overflow: hidden;
+	padding: 30px;
+	height: 100%;
+	float: left;
+	width: 50%;
+}
+
+/* 	Product Name */
+.containerChoices .product-details h1{
+	display: inline-block;
+	position: relative;
+	font-size: 34px;
+	color: #344055;
+	margin: 0;
+}
+
+.containerChoices .product-details h1:before{
+	position: absolute;
+	right: 0%; top: 0%;
+	transform: translate(25px, -15px);
+	display: inline-block;
+	background: #FFA69E;
+	border-radius: 5px;
+	font-size: 14px;
+	padding: 5px;
+	color: #FFF;
+	margin: 0;
+}
+
+/* The most important information about the product */
+.containerChoices .product-details > p {
+	text-align: center;
+	font-size: 20px;
+	color: #7d7d7d;
+}
+
+/* the Button */
+.btnn {
+	display: flex;
+
+	transform: translateY(0px);
+	transition: 0.3s linear;
+	background: #49C608;
+	border-radius: 5px;
+	cursor: pointer;
+	outline: none; border: none;
+	color: #eee;
+	padding: 0;
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.btnn:hover{transform: translateY(-4px);}
+
+.btnn span {
+	transition: transform 0.3s;
+	display: inline-block;
+  	padding: 10px 20px;
+	font-size: 0.5em;
+	margin:0;
+}
+
+/* shopping cart icon */
+.btnn .price{
+	height: 100%;
+
+	background: #333;
+	border: 0; margin: 0;
+
+	font-size: 0.5em;
+}
+
+.btnn .price {
+	transform: translateX(-10%); padding-right: 15px;
+}
+
+/* the Icon */
+.btnn .shopping-cart {
+	transform: translateX(-100%);
+  	position: absolute;
+	background: #333;
+	z-index: 1;
+	left: 0;
+	top: 0;
+}
+
+/* buy */
+.btnn .buy {z-index: 3; font-weight: bolder;}
+
+/* product image  */
+.product-image {
+	object-fit: cover;
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	height: 100%;
+	width: 50%;
+	display: inline-block;
+}
+
+.containerChoices img {
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+}
