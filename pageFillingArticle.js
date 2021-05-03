@@ -17,7 +17,7 @@ const getTeddy = async function (APIUrl) {
 }
 
 //permet de connaitre le Teddybear sélectionné dans index.js
-let GetURL = JSON.parse(sessionStorage.GetURLArticle);
+var GetURL = JSON.parse(sessionStorage.GetURLArticle);
 
 //permet de remplir le conten de la page, avaec la valeur envoyé par index.js
 getTeddy(GetURL)
@@ -59,7 +59,7 @@ const AddToBasket = function () {
             name : document.getElementById('articleNameTeddy').innerHTML,
             id : document.getElementById('articleNameTeddy').titel,
             image : document.getElementById('articleImageTeddy').src,
-            price : document.getElementById('articlePriceTeddy').innerHTML,
+            price : document.getElementById('articlePriceTeddy').innerHTML.slice(0, -1),
             color : document.getElementById('articleOptionsTeddy').options[document.getElementById('articleOptionsTeddy').selectedIndex].value
         };
         console.log('%c Find below the object that needs to be added to the basket', 'color: green; font-weight: bold;');
